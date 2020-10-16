@@ -1,0 +1,16 @@
+{
+    "name": "Regresson",
+    "version": "1.0",
+    "description": "Regress with Regressor",
+    "manifest_version": 2,
+    "permissions": ["declarativeContent", "storage"],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "page_action": {
+        "default_title": "Regressor",      
+        "default_popup": "popup.html"
+        }
+
+}
