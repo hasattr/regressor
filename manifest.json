@@ -1,9 +1,14 @@
 {
-    "name": "Regresson",
+    "name": "Regressor",
     "version": "1.0",
     "description": "Regress with Regressor",
     "manifest_version": 2,
-    "permissions": ["declarativeContent", "storage"],
+    "permissions": [
+        "activeTab",
+        "contextMenus",
+        "declarativeContent", 
+        "storage"
+    ],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
@@ -11,6 +16,12 @@
     "page_action": {
         "default_title": "Regressor",      
         "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+          "matches": ["*://*.activision.com/*"],
+          "js": ["contentScript.js"]
         }
+    ]
 
 }
