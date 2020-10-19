@@ -19,7 +19,7 @@ platform.addEventListener('change', (e) => {
     });
 });
 
-language.addEventListener('input', (e)=>{
+language.addEventListener('change', (e)=>{
     chrome.storage.local.set({'language': e.target.value}, function() {
         console.log(e.target.value)
    

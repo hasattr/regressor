@@ -13,31 +13,43 @@ chrome.runtime.onInstalled.addListener(function() {
       actions: [new chrome.declarativeContent.ShowPageAction()]
     }]);
   });
+
+  const regressType = ["VF", "VO", "CNV", "CNR"]
+  
+  regressType.forEach((type) => {
+      chrome.contextMenus.create({
+          id: type,
+          title: type,
+          contexts: ["editable"],
+          documentUrlPatterns: ["*://iwjira.activision.com/*", "*://tajira.activision.com/*"]
+      });
+  });
+
 });
 
 
-const regressType = ["VF", "VO", "CNV", "CNR"]
-
-regressType.forEach((type) => {
-    chrome.contextMenus.create({
-        id: type,
-        title: type,
-        contexts: ["editable"],
-        documentUrlPatterns: ["*://iwjira.activision.com/*", "*://tajira.activision.com/*"]
-    });
-});
 
 function insert (info, tab) {
   chrome.storage.local.get(['platform', 'language', 'build'], function(value) {
     
-    let data = [value.platform, value.language, value.build]
-  
-    let comment = `${data[0]}: ${info.menuItemId} for ${data[1]} on ${data[2]}.`
-  
-    if (info.menuItemId === 'VF') comment += ' Thanks!'
+    const {platform, language, build } = value;
+
+    if (platform && language && build) {
     
-    chrome.tabs.sendMessage(tab.id, {status: "addComment", message: comment})
- });
+      let comment = `${platform}: ${info.menuItemId} for ${language} on ${build}.`
+      if (info.menuItemId === 'VF') comment += ' Thanks!'
+      chrome.tabs.sendMessage(tab.id, {status: "addComment", message: comment})
+ 
+    } else {
+      let missing = [];
+      if(!platform) missing.push("Platform")
+      if(!language) missing.push("Language")
+      if(!build) missing.push("Build Number")
+
+      chrome.tabs.sendMessage(tab.id, {status: "missing", message: missing})
+      
+    }
+  });
 }
 
 

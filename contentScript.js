@@ -14,4 +14,9 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         textArea.value = message.message
         sendResponse({value: "commented"})
     }
+
+    if (message.status === "missing") {
+      let missing = message.message.join(", ")
+      alert("Missing: " + missing)
+    }
 });
