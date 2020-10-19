@@ -7,9 +7,9 @@ const build = document.getElementById("build");
 
 chrome.storage.local.get(['platform', 'language', 'build'], function(value) {
    console.log(value)
-   if(value.platform) platform.value = value.platform
-   if(value.language) language.value = value.language
-   if(value.build) build.value = value.build
+   value.platform ? platform.value = value.platform : platform.value = "PS4"
+   value.language ? language.value = value.language : null
+   value.build ? build.value = value.build : null
 });
 
 
