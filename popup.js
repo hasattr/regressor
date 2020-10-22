@@ -1,35 +1,50 @@
 
 
-const platform = document.getElementById("platform");
-const language = document.getElementById("language");
-const build = document.getElementById("build");
+const eltPlatform = document.getElementById("platform")
+const eltLanguage = document.getElementById("language")
+const eltBuild = document.getElementById("build")
+
+
+function setStorage(name, value) {
+  chrome.storage.local.set({[name]: value}, function() {
+    console.log(name, value)
+   });
+}
 
 
 chrome.storage.local.get(['platform', 'language', 'build'], function(value) {
-   console.log(value)
-   value.platform ? platform.value = value.platform : platform.value = "PS4"
-   value.language ? language.value = value.language : null
-   value.build ? build.value = value.build : null
+    
+  const { platform, language, build } = value
+  
+  const elts = [
+    { element: eltPlatform, value: platform, name: 'platform', default: 'PS4' },
+    { element: eltLanguage, value: language, name: 'language', default: 'AR' },
+    { element: eltBuild, value: build, name: 'build', default: ''}
+  ]
+
+  elts.forEach( elt =>{
+    if (elt.value) {
+      elt.element.value = elt.value
+      setStorage(elt.name, elt.value)
+    } else {
+      elt.element.value = elt.default
+      setStorage(elt.name, elt.default)
+    }
+  })
+
+  
 });
 
 
 platform.addEventListener('change', (e) => {
-    chrome.storage.local.set({'platform': e.target.value}, function() {
-     console.log(e.target.value)
-    });
+    setStorage('platform', e.target.value)
 });
 
 language.addEventListener('change', (e)=>{
-    chrome.storage.local.set({'language': e.target.value}, function() {
-        console.log(e.target.value)
-   
-    });
+    setStorage('language', e.target.value)
 });
 
 build.addEventListener('input', (e)=>{
-    chrome.storage.local.set({'build': e.target.value}, function() {
-        console.log(e.target.value)
-
-    });
+    setStorage('build', e.target.value)
 });
 

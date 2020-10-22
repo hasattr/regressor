@@ -6,14 +6,13 @@
     "permissions": [
         "activeTab",
         "contextMenus",
-        "declarativeContent", 
         "storage"
     ],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
     },
-    "page_action": {
+    "browser_action": {
         "default_title": "Regressor",      
         "default_popup": "popup.html",
         "default_icon": {
@@ -31,7 +30,8 @@
     },
     "content_scripts": [
         {
-          "matches": ["*://*.activision.com/*"],
+          "matches": ["<all_urls>"],
+          "all_frames": true,
           "js": ["contentScript.js"]
         }
     ]
