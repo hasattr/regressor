@@ -1,10 +1,11 @@
 {
     "name": "Regressor",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Regression comment generator.",
     "manifest_version": 2,
     "permissions": [
         "activeTab",
+        "declarativeContent",
         "contextMenus",
         "storage"
     ],
@@ -30,7 +31,7 @@
     },
     "content_scripts": [
         {
-          "matches": ["<all_urls>"],
+          "matches": ["*://*.activision.com/*"],
           "all_frames": true,
           "js": ["contentScript.js"]
         }
