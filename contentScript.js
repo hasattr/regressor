@@ -9,7 +9,6 @@ document.addEventListener("contextmenu", function(event){
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   if(message.status === "addComment" && textArea) {
-      console.log("sender", sender)
       let add = window.parent.document.querySelector("input[disabled='disabled']")
       add && add.removeAttribute("disabled")
       if(textArea.tagName === 'TEXTAREA' && textArea.id === 'comment') textArea.value = message.message

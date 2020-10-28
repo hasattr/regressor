@@ -1,19 +1,5 @@
 chrome.runtime.onInstalled.addListener(function() {
   
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-    chrome.declarativeContent.onPageChanged.addRules([{
-      conditions: [
-        new chrome.declarativeContent.PageStateMatcher({
-          pageUrl: {hostEquals: 'iwjira.activision.com'},
-        }),
-        new chrome.declarativeContent.PageStateMatcher({
-          pageUrl: {hostEquals: 'tajira.activision.com'},
-        })
-      ],
-      actions: [new chrome.declarativeContent.ShowPageAction()]
-    }]);
-  });
-  
   const regressType = ["VF", "VO", "CNV", "CNR"]
   
   regressType.forEach((type) => {
@@ -21,7 +7,7 @@ chrome.runtime.onInstalled.addListener(function() {
           id: type,
           title: type,
           contexts: ["editable", "frame"],
-          documentUrlPatterns: ["<all_urls>"]
+          documentUrlPatterns: ['about:blank', '*://tajira.activision.com/*', '*://iwjira.activision.com/*']
       });
   });
 
