@@ -4,7 +4,6 @@
     "description": "Regression comment generator.",
     "manifest_version": 2,
     "permissions": [
-        "activeTab",
         "contextMenus",
         "storage"
     ],
