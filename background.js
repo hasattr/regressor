@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(function() {
           id: type,
           title: type,
           contexts: ["editable", "frame"],
-          documentUrlPatterns: ['about:blank', '*://tajira.activision.com/*', '*://iwjira.activision.com/*']
+          documentUrlPatterns: ['about:blank', '*://*.activision.com/*']
       });
   });
 
@@ -22,7 +22,7 @@ function insert (info, tab) {
 
     if (platform && language && build) {
     
-      let comment = `${platform}: ${info.menuItemId} for ${language} on build ${build}.`
+      let comment = `${platform}: ${info.menuItemId} for ${language} on build ${build.trim()}.`
       if (info.menuItemId === 'VF') comment += ' Thanks!'
       chrome.tabs.sendMessage(tab.id, {status: "addComment", message: comment})
  

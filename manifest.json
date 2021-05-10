@@ -1,6 +1,6 @@
 {
     "name": "Regressor",
-    "version": "0.0.3.3 ",
+    "version": "1.0.2",
     "description": "Regression comment generator.",
     "manifest_version": 2,
     "permissions": [
